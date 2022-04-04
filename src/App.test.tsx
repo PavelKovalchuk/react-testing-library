@@ -2,18 +2,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-
-
-/* test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-}); */
-
-
 describe('when everything is OK', () => {
   test('should render component without crashing', () => {
-    render (<App />);
+    render(<App />);
     screen.debug();
+  });
+
+  test('should select the children that are being passed to the CustomInput', () => {
+    render(<App />);
+    screen.getByText('Input:');
+    expect(screen.getByText('Input:')).toBeInTheDocument();
+    screen.getByText(/Input:/);
   });
 });
