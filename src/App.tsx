@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
 import './App.css';
 
-function App() {
+interface CustomInputProps {
+  children: React.ReactNode;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function CustomInput({ children, value, onChange }: CustomInputProps) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <label htmlFor="search" />
+      <input id="search" type="text" value={value} onChange={onChange} />
+    </div>
+  );
+}
+
+function App() {
+  const [text, setText] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
+
+  return (
+    <div>
+      <CustomInput value={text} onChange={handleChange}>
+        Input:
+      </CustomInput>
+      <p>You typed {text || '...'}</p>
     </div>
   );
 }
