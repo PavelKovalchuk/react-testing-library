@@ -35,4 +35,9 @@ describe('when everything is OK', () => {
     render(<App />);
     screen.getByPlaceholderText('example');
   });
+
+  test('should select the input element by its role with queryBy', () => {
+    render(<App />);
+    expect(screen.queryByRole('textbox2')).toBeNull();
+  });
 });
