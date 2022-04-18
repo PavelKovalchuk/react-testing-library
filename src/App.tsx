@@ -49,9 +49,6 @@ function App() {
       <CustomInput value={text} onChange={handleChange}>
         Input:
       </CustomInput>
-      <CustomInput value={text} onChange={handleChange}>
-        Input:
-      </CustomInput>
       <p>You typed {text || '...'}</p>
     </div>
   );

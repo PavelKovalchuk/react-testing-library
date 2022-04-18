@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import {mocked} from "ts-jest/utils";
 import App from './App';
 import { getUser } from './get-user';
@@ -30,7 +30,7 @@ describe('when everything is OK', () => {
     // render(<App />);
     screen.getAllByRole('textbox');
     expect(screen.getAllByRole('textbox')[0]).toBeInTheDocument();
-    expect(screen.getAllByRole('textbox').length).toBe(2);
+    expect(screen.getAllByRole('textbox').length).toBe(1);
   });
 
   test('should select the label element by its text', () => {
@@ -75,4 +75,24 @@ describe('when the component fetches user successfully', () => {
     expect(await screen.findByText(/name/)).toBeInTheDocument();
   });
 
+});
+
+describe('when the user enters data in the input', () => {
+
+  beforeEach(async () => {
+    mockGetUser.mockClear();
+  })
+
+  test('should display the text in the screen', async () => {
+    render(<App />);
+    await waitFor(() => expect(mockGetUser).toHaveBeenCalled());
+
+    expect(screen.getByText(/You typed .../)).toBeInTheDocument();
+
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: {value: "Test"},
+    })
+
+    expect(screen.getByText(/You typed Test/)).toBeInTheDocument()
+  });
 });
