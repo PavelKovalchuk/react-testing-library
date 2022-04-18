@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import './App.css';
+import { getUser, User } from './get-user';
 
 interface CustomInputProps {
   children: React.ReactNode;
@@ -23,14 +24,7 @@ function CustomInput({ children, value, onChange }: CustomInputProps) {
   );
 }
 
-interface User {
-  id: string;
-  name: string;
-}
 
-function getUser(): Promise<User> {
-  return Promise.resolve({ id: '1', name: 'Paul' });
-}
 
 function App() {
   const [text, setText] = useState('');
