@@ -21,15 +21,16 @@ describe('when everything is OK', () => {
 
   test('should select the children that are being passed to the CustomInput', () => {
    // render(<App />);
-    screen.getByText('Input:');
-    expect(screen.getByText('Input:')).toBeInTheDocument();
-    screen.getByText(/Input:/);
+    screen.getAllByText('Input:');
+    expect(screen.getAllByText('Input:')[0]).toBeInTheDocument();
+    screen.getAllByText(/Input:/);
   });
 
   test('should select the input element by its role', () => {
     // render(<App />);
-    screen.getByRole('textbox');
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    screen.getAllByRole('textbox');
+    expect(screen.getAllByRole('textbox')[0]).toBeInTheDocument();
+    expect(screen.getAllByRole('textbox').length).toBe(2);
   });
 
   test('should select the label element by its text', () => {
@@ -39,12 +40,12 @@ describe('when everything is OK', () => {
 
   test('should select element by its placeholder', () => {
     // render(<App />);
-    screen.getByPlaceholderText('example');
+    screen.getAllByPlaceholderText('example');
   });
 
   test('should select the input element by its role with queryBy', () => {
     // render(<App />);
-    expect(screen.queryByRole('textbox2')).toBeNull();
+    expect(screen.queryAllByRole('textbox2').length).toBe(0);
   });
 });
 
