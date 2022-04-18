@@ -16,7 +16,7 @@ describe('when everything is OK', () => {
 
   test('should render component without crashing', () => {
     render(<App />);
-    screen.debug();
+    // screen.debug();
   });
 
   test('should select the children that are being passed to the CustomInput', () => {
@@ -58,6 +58,20 @@ describe('when the component fetches user successfully', () => {
   test('should call fetUser once', async () => {
     render(<App />);
     await waitFor(() => expect(mockGetUser).toHaveBeenCalledTimes(1));
+  });
+
+  test('should render the username passed', async () => {
+    const name = "David";
+    mockGetUser.mockImplementationOnce(() => {
+      return Promise.resolve({ id: '2', name });
+    });
+
+    render(<App />);
+    
+    expect(screen.queryByText(/Username/)).toBeNull();
+
+    expect(await screen.findByText(/Username/)).toBeInTheDocument();
+    expect(await screen.findByText(/name/)).toBeInTheDocument();
   });
 
 });
