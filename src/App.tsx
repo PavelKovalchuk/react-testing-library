@@ -1,29 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import './App.css';
+import CustomInput from './CustomInput';
 import { getUser, User } from './get-user';
-
-interface CustomInputProps {
-  children: React.ReactNode;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-function CustomInput({ children, value, onChange }: CustomInputProps) {
-  return (
-    <div>
-      <label htmlFor="search">{children}</label>
-      <input
-        id="search"
-        type="text"
-        value={value}
-        onChange={onChange}
-        placeholder="example"
-      />
-    </div>
-  );
-}
-
 
 
 function App() {
