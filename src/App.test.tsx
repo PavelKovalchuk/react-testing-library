@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import userEvent from "@testing-library/user-event";
 import {mocked} from "ts-jest/utils";
 import App from './App';
 import { getUser } from './get-user';
@@ -94,5 +95,15 @@ describe('when the user enters data in the input', () => {
     })
 
     expect(screen.getByText(/You typed Test/)).toBeInTheDocument()
+  });
+
+  test('should display the text in the screen with userEvent', async () => {
+    render(<App />);
+    
+    expect(screen.getByText(/You typed .../)).toBeInTheDocument();
+
+    await userEvent.type(screen.getByRole("textbox"), "Test2")
+
+    expect(screen.getByText(/You typed Test2/)).toBeInTheDocument()
   });
 });
